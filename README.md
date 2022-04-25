@@ -54,8 +54,8 @@ Y <- abind(YP, YC) # t x s x nl
 Y <- array(Y, dim = c(t,s,b,n)) # t x s x b x n
 
 #'@PPD/CAL
-#'Y[,,,1] # 290 subjects for PPD
-#'Y[,,,2] # 290 subjects for CAL
+#'Y[,,,1] # n subjects for PPD
+#'Y[,,,2] # n subjects for CAL
 
 ## covariates
 X <- data[,7:11]
