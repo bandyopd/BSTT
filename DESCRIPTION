@@ -1,0 +1,10 @@
+Package: BSTT
+Type: Package
+Title: A New Class of Skewed Tensor Distributions
+Version: 0.1.0
+Author: Inkoo Lee, Debajyoti Sinha, Qing Mai and Dipankar Bandyopadhyay
+Maintainer: Inkoo Lee <inkoo.lee@rice.edu>
+Description: A New Class of Skewed Tensor Distributions
+License: GPL-3
+Encoding: UTF-8
+LazyData: true

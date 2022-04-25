@@ -1,0 +1,627 @@
+---
+title: "A New Class of Skewed Tensor Distributions"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{A New Class of Skewed Tensor Distributions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(kableExtra)
+options(knitr.table.format = 'markdown')
+```
+
+Inkoo Lee
+
+Last Updated - April 24, 2022
+
+## Paper 
+
+- Lee, I., Sinha, D., Mai, Q. & Bandyopadhyay, D. (2021+). *A New Class of Skewed Tensor Distributions.* [[Github]](https://github.com/InkooLee/BSTT)
+
+
+## Skewed tensor response model
+For an order-$K$ tensor response $\mathcal{Y}_i \in \mathbb{R}^{d_1 \times \cdots \times d_K}$ with a vector of covariates $\textbf{x}_i \in \mathbb{R}^p$, we consider a tensor response regression model 
+\begin{equation}\label{eq1}
+    \mathcal{Y}_{i} = \mathcal{B}\bar{\times}_{(K+1)} \textbf{x}_{i} + \mathcal{E}_{i},~~for~~ i=1,\ldots,n,~ 
+\end{equation}
+where $\mathcal{B} \in \mathbb{R}^{d_1 \times \cdots \times d_K \times p}$ is an order-$(K+1)$ unknown tensor of regression coefficients, $\bar{\times}_{(K+1)}$ is the $(K+1)$-mode vector product, and the error $\mathcal{E}_{i} \in \mathbb{R}^{d_1 \times \cdots \times d_K}$ is an order-$K$ tensor. We model the skewness in 
+the distribution of $\mathcal{Y}$ via 
+\begin{equation}\label{eq2}
+ \mathcal{E}_{i} = |\mathcal{Z}_{2i}|\times_{K} \pmb{\Lambda} + \mathcal{Z}_{1i}, 
+\end{equation}
+where $\pmb{\Lambda} = diag(\lambda_1,\ldots,\lambda_{d_K}) \in \mathbb{R}^{d_K \times d_K}$ with skewness parameters $\pmb{\lambda}=(\lambda_1,\ldots,\lambda_{d_K})$ and $|\mathbf{M}|$ denotes the
+matrix whose each element of is the absolute value of the corresponding element of matrix $\mathbf{M}$. 
+
+## Tensor Spike-and-Slab Lasso prior
+To address the desired dimension reduction of the regression coefficient tensor $\mathcal{B}$ 
+while ensuring practical clinical interpretation 
+of covariate effects, we use $\beta_{i_1i_2i_3j} = \eta_{i_3j} + \alpha_{i_1i_2i_3j}$ to split 
+the effect of $j$-th covariate $x_j$ into overall effects $\eta_{1j}$ and $\eta_{2j}$ on two biomarkers and the difference 
+$\alpha_{i_1i_2i_3j}$ of the effect of $x_j$ on 
+biomarker $i_3$ from site $i_2$ of tooth $i_1$.
+We use a common independent $ \textit{N}(0,\tau^2)$ prior for each $\eta_{i_3j}$ and an 
+independent spike-and-slab lasso based sparsity inducing prior \citep{rovckova2018spike}  
+for tensor $\mathcal{A}\in \mathbb{R}^{28\times 6\times 2\times 6}$ with elements 
+$\alpha_{i_1i_2i_3j}$ as
+\begin{equation}\label{eq:TSSL}
+\begin{aligned}
+    &\alpha_{i_1i_2i_3j} \overset{iid}{\sim} (1-\omega_{i_1i_2i_3j})\psi(\alpha_{i_1i_2i_3j}\mid\gamma_0) + \omega_{i_1i_2i_3j}\psi(\alpha_{i_1i_2i_3j}\mid\gamma),\\
+       & \omega_{i_1i_2i_3j}\overset{iid}\sim \textit{Bernoulli}(\phi),
+\end{aligned}
+\end{equation}
+where $\gamma_0\ll\gamma_1$ and $\psi(u\mid\gamma) = (\gamma/2)\textnormal{exp}(-\gamma|u|)$ is the mean-zero Laplace distribution. 
+%When $\gamma \ll \gamma_0$, tensor spike-and-slab lasso prior \eqref{eq:TSSL} closely retrieve to tensor spike-and-slab prior. 
+The large value of $\phi$ produces highly sparse elements in $\mathcal{A}$. 
+
+## Tensor Normal prior
+The alternative choice for $\mathcal{B}$ is tensor normal prior, $\mathcal{B} \sim TN(\textbf{0},b\textbf{I}_{28}$, $b\textbf{I}_6,b\textbf{I}_2,b\textbf{I}_6)$ for some large $b > 0$. 
+
+
+## GAAD data analysis using `BSTT` package
+
+```{r, eval = FALSE}
+## Load package
+library(BSTT)
+```
+
+We fit the BSTT (Bayesian skewed tensor-$t$) model with tensor spike-and-slab lasso (TSSL) prior.
+
+```{r, eval = FALSE}
+# n.burn = burn-in period, n.save = number of posterior samples, thin = thinning size
+BSTT_TSSL <- BSTT_TSSL(Y,X,vecy, n.burn = 100, n.save = 1000, thin = 5)
+```
+
+### D-Statistic
+$D = d_1/|d_2|$ for 
+each regression effects $\mathcal{B}_{i_1i_2i_3j}$, where $d_1$ is distance of the Bayesian estimate (posterior median) from null value (0 here) and $d_2$ is the distance of the Bayes estimate from the nearest endpoint of the 95\% CI of the parameter. 
+Here, $D > 1.5$ $(D < -1.5)$ implies strong posterior evidence of positive (negative) effect of covariate $x_j$ on the biomarker $i_3$ at site $i_2$ of tooth $i_1$. 
+Similarly, the range $-0.8 < D < 0.8$ suggests moderate evidence 
+for null hypothesis, and $0.8 \leq  D \leq 1.5$ represents moderate positive effect, and $-1.5 \leq D \leq -0.8$ denotes moderate negative effect of $x_j$ on $\mathcal{Y}_{i_1i_2i_3}$.
+
+The following plot (Figure 2 in the main text) shows D-statistic map of tensor regression coefficients with TSSL prior. 
+
+```{r, echo=FALSE, fig.align='center', fig.width=7, fig.height=3, warning=FALSE}
+library(lattice)
+setwd("C:/Users/inkku/Downloads")
+
+load("Result_BSTT_TSSL_PPD.rda")
+load("Result_BSTT_TSSL_CAL.rda")
+
+PPD_B.est <- PPD_BSTT_TSSL$B.est[2:6,,]
+CAL_B.est <- CAL_BSTT_TSSL$B.est[2:6,,]
+
+
+PPD2init <- as.matrix(PPD_B.est[1,,])
+PPD3init <- as.matrix(PPD_B.est[2,,])
+PPD4init <- as.matrix(PPD_B.est[3,,])
+PPD5init <- as.matrix(PPD_B.est[4,,])
+PPD6init <- as.matrix(PPD_B.est[5,,])
+
+
+CAL2init <- as.matrix(CAL_B.est[1,,])
+CAL3init <- as.matrix(CAL_B.est[2,,])
+CAL4init <- as.matrix(CAL_B.est[3,,])
+CAL5init <- as.matrix(CAL_B.est[4,,])
+CAL6init <- as.matrix(CAL_B.est[5,,])
+
+library(lattice)
+
+t=28;s=6;
+Acol.regions <- c("#FF80FFFF","#FFB6C1", "#FFFFFF", "#BFFFFFFF", "#1E90FF")
+
+## PPD AGE ##
+CIPPD2 <- matrix(NA,168,3)
+
+for (i in 1:168){
+  CIPPD2[i,] <- quantile(PPD2init[i,], c(0.025,0.5,0.975))
+}
+
+matrix(CIPPD2[,2]/(CIPPD2[,2] - CIPPD2[,1]),t,s)
+PPD2_d1 <- as.matrix(CIPPD2[,2]); PPD2_d2 <- matrix(NA, 168, 1)
+for (i in 1:168){
+  if (PPD2_d1[i,] > 0){
+    PPD2_d2[i,] <- PPD2_d1[i,] - CIPPD2[i,1]
+  }
+  else {PPD2_d2[i,] <- CIPPD2[i,3] - PPD2_d1[i,]}
+}
+PPD2map <- PPD2_d1/abs(PPD2_d2)
+PPD2map <- matrix(PPD2map, t,s)
+min(PPD2map); max(PPD2map)
+PPD2map <- levelplot(t(PPD2map),col.regions = Acol.regions,xlab="sites",ylab="teeth", at = c(-100,-4,-3.2,1,1.5,100),
+                     colorkey = FALSE, labels=as.character(c(-100,-4,-3.2,1,1.5,100)),
+                     margin=F, scales = list(draw = FALSE),main = "PPD_Age")
+
+print(PPD2map, split = c(1, 1, 5, 2), more = TRUE)
+
+## PPD Gender ##
+CIPPD3 <- matrix(NA,168,3)
+
+for (i in 1:168){
+  CIPPD3[i,] <- quantile(PPD3init[i,], c(0.025,0.5,0.975))
+}
+
+PPD3_d1 <- as.matrix(CIPPD3[,2]); PPD3_d2 <- matrix(NA, 168, 1)
+for (i in 1:168){
+  if (PPD3_d1[i,] > 0){
+    PPD3_d2[i,] <- PPD3_d1[i,] - CIPPD3[i,1]
+  }
+  else {PPD3_d2[i,] <- CIPPD3[i,3] - PPD3_d1[i,]}
+}
+PPD3map <- PPD3_d1/abs(PPD3_d2)
+PPD3map <- matrix(PPD3map, t,s)
+min(PPD3map); max(PPD3map); PPD3map[16,6] <- -1.75
+PPD3map <- levelplot(t(PPD3map),col.regions = Acol.regions,xlab="sites",ylab="teeth", at = c(-10,-1.5,-0.75,0.75,1.5,4),
+                     colorkey = FALSE, labels=as.character(c(-10,-1.5,-0.75,0.75,1.5,4)),
+                     margin=F, scales = list(draw = FALSE),main = "PPD_Gender")
+
+print(PPD3map, split = c(2, 1, 5, 2), more = TRUE)
+
+## PPD BMI ##
+CIPPD4 <- matrix(NA,168,3)
+
+for (i in 1:168){
+  CIPPD4[i,] <- quantile(PPD4init[i,], c(0.025,0.5,0.975))
+}
+
+
+PPD4_d1 <- as.matrix(CIPPD4[,2]); PPD4_d2 <- matrix(NA, 168, 1)
+for (i in 1:168){
+  if (PPD4_d1[i,] > 0){
+    PPD4_d2[i,] <- PPD4_d1[i,] - CIPPD4[i,1]
+  }
+  else {PPD4_d2[i,] <- CIPPD4[i,3] - PPD4_d1[i,]}
+}
+PPD4map <- PPD4_d1/abs(PPD4_d2)
+PPD4map <- matrix(PPD4map, t,s)
+min(PPD4map);max(PPD4map)
+PPD4map <- levelplot(t(PPD4map),col.regions = Acol.regions,xlab="sites",ylab="teeth", at = c(-4,-1.5,-0.9,0.9,1.5,4),
+                     colorkey = FALSE, labels=as.character(c(-4,-1.5,-0.9,0.9,1.5,4)),
+                     margin=F, scales = list(draw = FALSE),main = "PPD_BMI")
+print(PPD4map, split = c(3, 1, 5, 2), more = TRUE)
+
+
+
+## PPD Smoker ##
+CIPPD5 <- matrix(NA,168,3)
+
+for (i in 1:168){
+  CIPPD5[i,] <- quantile(PPD5init[i,], c(0.025,0.5,0.975))
+}
+
+
+PPD5_d1 <- as.matrix(CIPPD5[,2]); PPD5_d2 <- matrix(NA, 168, 1)
+for (i in 1:168){
+  if (PPD5_d1[i,] > 0){
+    PPD5_d2[i,] <- PPD5_d1[i,] - CIPPD5[i,1]
+  }
+  else {PPD5_d2[i,] <- CIPPD5[i,3] - PPD5_d1[i,]}
+}
+PPD5map <- PPD5_d1/abs(PPD5_d2)
+PPD5map <- matrix(PPD5map, t,s)
+min(PPD5map);max(PPD5map)
+PPD5map <- levelplot(t(PPD5map),col.regions = Acol.regions,xlab="sites",ylab="teeth", at = c(-4,-1.5,-0.8,0.8,1.5,8),
+                     colorkey = FALSE, labels=as.character(c(-4,-1.5,-0.8,0.8,1.5,8)),
+                     margin=F, scales = list(draw = FALSE),main = "PPD_Smoker")
+print(PPD5map, split = c(4, 1, 5, 2), more = TRUE)
+
+## PPD HbA1c ##
+CIPPD6 <- matrix(NA,168,3)
+
+for (i in 1:168){
+  CIPPD6[i,] <- quantile(PPD6init[i,], c(0.025,0.5,0.975))
+}
+
+
+PPD6_d1 <- as.matrix(CIPPD6[,2]); PPD6_d2 <- matrix(NA, 168, 1)
+for (i in 1:168){
+  if (PPD6_d1[i,] > 0){
+    PPD6_d2[i,] <- PPD6_d1[i,] - CIPPD6[i,1]
+  }
+  else {PPD6_d2[i,] <- CIPPD6[i,3] - PPD6_d1[i,]}
+}
+PPD6map <- PPD6_d1/abs(PPD6_d2)
+PPD6map <- matrix(PPD6map, t,s)
+min(PPD6map);max(PPD6map)
+PPD6map <- levelplot(t(PPD6map),col.regions = Acol.regions,xlab="sites",ylab="teeth", at = c(-4,-1.5,-0.8,0.8,1.5,8),
+                     colorkey = FALSE, labels=as.character(c(-4,-1.5,-0.8,0.8,1.5,8)),
+                     margin=F, scales = list(draw = FALSE),main = "PPD_HbA1c")
+print(PPD6map, split = c(5, 1, 5, 2), more = TRUE)
+
+
+## CAL AGE ##
+
+CICAL2 <- matrix(NA,168,3)
+
+for (i in 1:168){
+  CICAL2[i,] <- quantile(CAL2init[i,], c(0.025,0.5,0.975))
+}
+
+
+CAL2_d1 <- as.matrix(CICAL2[,2]); CAL2_d2 <- matrix(NA, 168, 1)
+for (i in 1:168){
+  if (CAL2_d1[i,] > 0){
+    CAL2_d2[i,] <- CAL2_d1[i,] - CICAL2[i,1]
+  }
+  else {CAL2_d2[i,] <- CICAL2[i,3] - CAL2_d1[i,]}
+}
+CAL2map <- CAL2_d1/abs(CAL2_d2)
+CAL2map <- matrix(CAL2map, t,s)
+max(CAL2map);min(CAL2map)
+CAL2map <- levelplot(t(CAL2map),col.regions = Acol.regions,xlab="sites",ylab="teeth", at = c(-100,-4,-3.2,1,1.48,100),
+                     colorkey = FALSE, labels=as.character(c(-100,-4,-3.2,1,1.48,100)),
+                     margin=F, scales = list(draw = FALSE),main = "CAL_Age")
+
+print(CAL2map, split = c(1, 2, 5, 2), more = TRUE)
+
+## CAL Gender ##
+CICAL3 <- matrix(NA,168,3)
+
+for (i in 1:168){
+  CICAL3[i,] <- quantile(CAL3init[i,], c(0.025,0.5,0.975))
+}
+
+
+CAL3_d1 <- as.matrix(CICAL3[,2]); CAL3_d2 <- matrix(NA, 168, 1)
+for (i in 1:168){
+  if (CAL3_d1[i,] > 0){
+    CAL3_d2[i,] <- CAL3_d1[i,] - CICAL3[i,1]
+  }
+  else {CAL3_d2[i,] <- CICAL3[i,3] - CAL3_d1[i,]}
+}
+CAL3map <- CAL3_d1/abs(CAL3_d2)
+CAL3map <- matrix(CAL3map, t,s)
+min(CAL3map); max(CAL3map)
+CAL3map <- levelplot(t(CAL3map),col.regions = Acol.regions,xlab="sites",ylab="teeth", at = c(-10,-1.5,-0.8,0.8,1.5,4),
+                     colorkey = FALSE, labels=as.character(c(-10,-1.5,-0.8,0.8,1.5,4)),
+                     margin=F, scales = list(draw = FALSE),main = "CAL_Gender")
+
+print(CAL3map, split = c(2, 2, 5, 2), more = TRUE)
+
+## CAL BMI ##
+CICAL4 <- matrix(NA,168,3)
+
+for (i in 1:168){
+  CICAL4[i,] <- quantile(CAL4init[i,], c(0.025,0.5,0.975))
+}
+
+
+CAL4_d1 <- as.matrix(CICAL4[,2]); CAL4_d2 <- matrix(NA, 168, 1)
+for (i in 1:168){
+  if (CAL4_d1[i,] > 0){
+    CAL4_d2[i,] <- CAL4_d1[i,] - CICAL4[i,1]
+  }
+  else {CAL4_d2[i,] <- CICAL4[i,3] - CAL4_d1[i,]}
+}
+CAL4map <- CAL4_d1/abs(CAL4_d2)
+CAL4map <- matrix(CAL4map, t,s)
+min(CAL4map); max(CAL4map)
+CAL4map <- levelplot(t(CAL4map),col.regions = Acol.regions,xlab="sites",ylab="teeth", at = c(-4,-2,-1,1,2,4),
+                     colorkey = FALSE, labels=as.character(c(-4,-2,-1,1,2,4)),
+                     margin=F, scales = list(draw = FALSE),main = "CAL_BMI")
+print(CAL4map, split = c(3, 2, 5, 2), more = TRUE)
+
+## CAL Smoker ##
+CICAL5 <- matrix(NA,168,3)
+
+for (i in 1:168){
+  CICAL5[i,] <- quantile(CAL5init[i,], c(0.025,0.5,0.975))
+}
+
+CAL5_d1 <- as.matrix(CICAL5[,2]); CAL5_d2 <- matrix(NA, 168, 1)
+for (i in 1:168){
+  if (CAL5_d1[i,] > 0){
+    CAL5_d2[i,] <- CAL5_d1[i,] - CICAL5[i,1]
+  }
+  else {CAL5_d2[i,] <- CICAL5[i,3] - CAL5_d1[i,]}
+}
+CAL5map <- CAL5_d1/abs(CAL5_d2)
+CAL5map <- matrix(CAL5map, t,s)
+min(CAL5map);max(CAL5map)
+CAL5map <- levelplot(t(CAL5map),col.regions = Acol.regions,xlab="sites",ylab="teeth", at = c(-4,-1.5,-0.8,0.8,1.5,100),
+                     colorkey = FALSE, labels=as.character(c(-4,-1.5,-0.8,0.8,1.5,100)),
+                     margin=F, scales = list(draw = FALSE),main = "CAL_Smoker")
+print(CAL5map, split = c(4, 2, 5, 2), more = TRUE)
+
+## CAL HbA1c ##
+
+CICAL6 <- matrix(NA,168,3)
+
+for (i in 1:168){
+  CICAL6[i,] <- quantile(CAL6init[i,], c(0.025,0.5,0.975))
+}
+
+CAL6_d1 <- as.matrix(CICAL5[,2]); CAL6_d2 <- matrix(NA, 168, 1)
+for (i in 1:168){
+  if (CAL6_d1[i,] > 0){
+    CAL6_d2[i,] <- CAL6_d1[i,] - CICAL6[i,1]
+  }
+  else {CAL6_d2[i,] <- CICAL6[i,3] - CAL6_d1[i,]}
+}
+CAL6map <- CAL6_d1/abs(CAL6_d2)
+CAL6map <- matrix(CAL6map, t,s)
+min(CAL6map);max(CAL6map)
+CAL6map <- levelplot(t(CAL6map),col.regions = Acol.regions,xlab="sites",ylab="teeth", at = c(-4,-1.5,-0.8,0.8,1.25,300),
+                     colorkey = FALSE, labels=as.character(c(-4,-1.5,-0.8,0.8,1.3,300)),
+                     margin=F, scales = list(draw = FALSE),main = "CAL_HbA1c")
+print(CAL6map, split = c(5, 2, 5, 2), more = TRUE)
+```
+
+Now, We fit the BSTT model with tensor normal prior.
+
+```{r, echo=FALSE}
+BSTT_TN <- BSTT_TN(Y,X,vecy, n.burn = 100, n.save = 1000, thin = 5)
+```
+
+```{r, fig.align='center', fig.width=6, fig.height=3}
+library(lattice)
+setwd("C:/Users/inkku/Downloads")
+
+load("Result_BSTT.rda")
+
+t = 28; s = 6; b = 2;
+
+PPD_B.est <- result$B.est[2:6,1:(t*s),]
+dim(PPD_B.est) 
+
+PPD2init <- as.matrix(PPD_B.est[1,,])
+PPD3init <- as.matrix(PPD_B.est[2,,])
+PPD4init <- as.matrix(PPD_B.est[3,,])
+PPD5init <- as.matrix(PPD_B.est[4,,])
+PPD6init <- as.matrix(PPD_B.est[5,,])
+
+CAL_B.est <- result$B.est[2:6,(t*s + 1):(t*s*b),]
+dim(CAL_B.est)
+
+CAL2init <- as.matrix(CAL_B.est[1,,])
+CAL3init <- as.matrix(CAL_B.est[2,,])
+CAL4init <- as.matrix(CAL_B.est[3,,])
+CAL5init <- as.matrix(CAL_B.est[4,,])
+CAL6init <- as.matrix(CAL_B.est[5,,])
+
+Acol.regions <- c("#FF80FFFF","#FFB6C1", "#FFFFFF", "#BFFFFFFF", "#1E90FF")
+
+## PPD AGE ##
+CIPPD2 <- matrix(NA,168,3)
+
+for (i in 1:168){
+  CIPPD2[i,] <- quantile(PPD2init[i,], c(0.025,0.5,0.975))
+}
+
+PPD2_d1 <- as.matrix(CIPPD2[,2]); PPD2_d2 <- matrix(NA, 168, 1)
+for (i in 1:168){
+  if (PPD2_d1[i,] > 0){
+    PPD2_d2[i,] <- PPD2_d1[i,] - CIPPD2[i,1]
+  }
+  else {PPD2_d2[i,] <- CIPPD2[i,3] - PPD2_d1[i,]}
+}
+PPD2map <- PPD2_d1/abs(PPD2_d2)
+PPD2map <- matrix(PPD2map, t,s)
+
+PPD2map <- levelplot(t(PPD2map),col.regions = Acol.regions,xlab="sites",ylab="teeth", at = c(-1000,-1.5,-0.8,0.8,1.5,1000),
+                     colorkey = FALSE, labels=as.character(c(-1000,-1.5,-0.8,0.8,1.5,1000)),
+                     margin=F, scales = list(draw = FALSE),main = "PPD_Age")
+
+print(PPD2map, split = c(1, 1, 5, 2), more = TRUE)
+
+## PPD Gender ##
+CIPPD3 <- matrix(NA,168,3)
+
+for (i in 1:168){
+  CIPPD3[i,] <- quantile(PPD3init[i,], c(0.025,0.5,0.975))
+}
+
+PPD3_d1 <- as.matrix(CIPPD3[,2]); PPD3_d2 <- matrix(NA, 168, 1)
+for (i in 1:168){
+  if (PPD3_d1[i,] > 0){
+    PPD3_d2[i,] <- PPD3_d1[i,] - CIPPD3[i,1]
+  }
+  else {PPD3_d2[i,] <- CIPPD3[i,3] - PPD3_d1[i,]}
+}
+PPD3map <- PPD3_d1/abs(PPD3_d2)
+PPD3map <- matrix(PPD3map, t,s)
+
+PPD3map <- levelplot(t(PPD3map),col.regions = Acol.regions,xlab="sites",ylab="teeth", at = c(-1000,-1.5,-0.8,0.8,1.5,1000),
+                     colorkey = FALSE, labels=as.character(c(-1000,-1.5,-0.8,0.8,1.5,1000)),
+                     margin=F, scales = list(draw = FALSE),main = "PPD_Gender")
+
+print(PPD3map, split = c(2, 1, 5, 2), more = TRUE)
+
+## PPD BMI ##
+CIPPD4 <- matrix(NA,168,3)
+
+for (i in 1:168){
+  CIPPD4[i,] <- quantile(PPD4init[i,], c(0.025,0.5,0.975))
+}
+
+PPD4_d1 <- as.matrix(CIPPD4[,2]); PPD4_d2 <- matrix(NA, 168, 1)
+for (i in 1:168){
+  if (PPD4_d1[i,] > 0){
+    PPD4_d2[i,] <- PPD4_d1[i,] - CIPPD4[i,1]
+  }
+  else {PPD4_d2[i,] <- CIPPD4[i,3] - PPD4_d1[i,]}
+}
+PPD4map <- PPD4_d1/abs(PPD4_d2)
+PPD4map <- matrix(PPD4map, t,s)
+
+PPD4map <- levelplot(t(PPD4map),col.regions = Acol.regions,xlab="sites",ylab="teeth", at = c(-1000,-1.5,-0.8,0.8,1.5,1000),
+                     colorkey = FALSE, labels=as.character(c(-1000,-1.5,-0.8,0.8,1.5,1000)),
+                     margin=F, scales = list(draw = FALSE),main = "PPD_BMI")
+print(PPD4map, split = c(3, 1, 5, 2), more = TRUE)
+
+
+## PPD Smoker ##
+CIPPD5 <- matrix(NA,168,3)
+
+for (i in 1:168){
+  CIPPD5[i,] <- quantile(PPD5init[i,], c(0.025,0.5,0.975))
+}
+
+PPD5_d1 <- as.matrix(CIPPD5[,2]); PPD5_d2 <- matrix(NA, 168, 1)
+for (i in 1:168){
+  if (PPD5_d1[i,] > 0){
+    PPD5_d2[i,] <- PPD5_d1[i,] - CIPPD5[i,1]
+  }
+  else {PPD5_d2[i,] <- CIPPD5[i,3] - PPD5_d1[i,]}
+}
+PPD5map <- PPD5_d1/abs(PPD5_d2)
+PPD5map <- matrix(PPD5map, t,s)
+
+PPD5map <- levelplot(t(PPD5map),col.regions = Acol.regions,xlab="sites",ylab="teeth", at = c(-1000,-1.5,-0.8,0.8,1.5,1000),
+                     colorkey = FALSE, labels=as.character(c(-1000,-1.5,-0.8,0.8,1.5,1000)),
+                     margin=F, scales = list(draw = FALSE),main = "PPD_Smoker")
+print(PPD5map, split = c(4, 1, 5, 2), more = TRUE)
+
+## PPD HbA1c ##
+CIPPD6 <- matrix(NA,168,3)
+
+for (i in 1:168){
+  CIPPD6[i,] <- quantile(PPD6init[i,], c(0.025,0.5,0.975))
+}
+
+PPD6_d1 <- as.matrix(CIPPD6[,2]); PPD6_d2 <- matrix(NA, 168, 1)
+for (i in 1:168){
+  if (PPD6_d1[i,] > 0){
+    PPD6_d2[i,] <- PPD6_d1[i,] - CIPPD6[i,1]
+  }
+  else {PPD6_d2[i,] <- CIPPD6[i,3] - PPD6_d1[i,]}
+}
+PPD6map <- PPD6_d1/abs(PPD6_d2)
+PPD6map <- matrix(PPD6map, t,s)
+
+PPD6map <- levelplot(t(PPD6map),col.regions = Acol.regions,xlab="sites",ylab="teeth", at = c(-1000,-1.5,-0.8,0.8,1.5,1000),
+                     colorkey = FALSE, labels=as.character(c(-1000,-1.5,-0.8,0.8,1.5,1000)),
+                     margin=F, scales = list(draw = FALSE),main = "PPD_HbA1c")
+print(PPD6map, split = c(5, 1, 5, 2), more = TRUE)
+
+
+## CAL AGE ##
+CICAL2 <- matrix(NA,168,3)
+
+for (i in 1:168){
+  CICAL2[i,] <- quantile(CAL2init[i,], c(0.025,0.5,0.975))
+}
+
+CAL2_d1 <- as.matrix(CICAL2[,2]); CAL2_d2 <- matrix(NA, 168, 1)
+for (i in 1:168){
+  if (CAL2_d1[i,] > 0){
+    CAL2_d2[i,] <- CAL2_d1[i,] - CICAL2[i,1]
+  }
+  else {CAL2_d2[i,] <- CICAL2[i,3] - CAL2_d1[i,]}
+}
+CAL2map <- CAL2_d1/abs(CAL2_d2)
+CAL2map <- matrix(CAL2map, t,s)
+
+CAL2map <- levelplot(t(CAL2map),col.regions = Acol.regions,xlab="sites",ylab="teeth", at = c(-1000,-1.5,-0.8,0.8,1.5,1000),
+                     colorkey = FALSE, labels=as.character(c(-1000,-1.5,-0.8,0.8,1.5,1000)),
+                     margin=F, scales = list(draw = FALSE),main = "CAL_Age")
+
+print(CAL2map, split = c(1, 2, 5, 2), more = TRUE)
+
+## CAL Gender ##
+CICAL3 <- matrix(NA,168,3)
+
+for (i in 1:168){
+  CICAL3[i,] <- quantile(CAL3init[i,], c(0.025,0.5,0.975))
+}
+
+CAL3_d1 <- as.matrix(CICAL3[,2]); CAL3_d2 <- matrix(NA, 168, 1)
+for (i in 1:168){
+  if (CAL3_d1[i,] > 0){
+    CAL3_d2[i,] <- CAL3_d1[i,] - CICAL3[i,1]
+  }
+  else {CAL3_d2[i,] <- CICAL3[i,3] - CAL3_d1[i,]}
+}
+CAL3map <- CAL3_d1/abs(CAL3_d2)
+CAL3map <- matrix(CAL3map, t,s)
+
+CAL3map <- levelplot(t(CAL3map),col.regions = Acol.regions,xlab="sites",ylab="teeth", at = c(-1000,-1.5,-0.8,0.8,1.5,1000),
+                     colorkey = FALSE, labels=as.character(c(-1000,-1.5,-0.8,0.8,1.5,1000)),
+                     margin=F, scales = list(draw = FALSE),main = "CAL_Gender")
+
+print(CAL3map, split = c(2, 2, 5, 2), more = TRUE)
+
+## CAL BMI ##
+CICAL4 <- matrix(NA,168,3)
+
+for (i in 1:168){
+  CICAL4[i,] <- quantile(CAL4init[i,], c(0.025,0.5,0.975))
+}
+
+CAL4_d1 <- as.matrix(CICAL4[,2]); CAL4_d2 <- matrix(NA, 168, 1)
+for (i in 1:168){
+  if (CAL4_d1[i,] > 0){
+    CAL4_d2[i,] <- CAL4_d1[i,] - CICAL4[i,1]
+  }
+  else {CAL4_d2[i,] <- CICAL4[i,3] - CAL4_d1[i,]}
+}
+CAL4map <- CAL4_d1/abs(CAL4_d2)
+CAL4map <- matrix(CAL4map, t,s)
+
+CAL4map <- levelplot(t(CAL4map),col.regions = Acol.regions,xlab="sites",ylab="teeth", at = c(-1000,-1.5,-0.8,0.8,1.5,1000),
+                     colorkey = FALSE, labels=as.character(c(-1000,-1.5,-0.8,0.8,1.5,1000)),
+                     margin=F, scales = list(draw = FALSE),main = "CAL_BMI")
+print(CAL4map, split = c(3, 2, 5, 2), more = TRUE)
+
+## CAL Smoker ##
+CICAL5 <- matrix(NA,168,3)
+
+for (i in 1:168){
+  CICAL5[i,] <- quantile(CAL5init[i,], c(0.025,0.5,0.975))
+}
+
+CAL5_d1 <- as.matrix(CICAL5[,2]); CAL5_d2 <- matrix(NA, 168, 1)
+for (i in 1:168){
+  if (CAL5_d1[i,] > 0){
+    CAL5_d2[i,] <- CAL5_d1[i,] - CICAL5[i,1]
+  }
+  else {CAL5_d2[i,] <- CICAL5[i,3] - CAL5_d1[i,]}
+}
+CAL5map <- CAL5_d1/abs(CAL5_d2)
+CAL5map <- matrix(CAL5map, t,s)
+
+CAL5map <- levelplot(t(CAL5map),col.regions = Acol.regions,xlab="sites",ylab="teeth", at = c(-1000,-1.5,-0.8,0.8,1.5,1000),
+                     colorkey = FALSE, labels=as.character(c(-1000,-1.5,-0.8,0.8,1.5,1000)),
+                     margin=F, scales = list(draw = FALSE),main = "CAL_Smoker")
+print(CAL5map, split = c(4, 2, 5, 2), more = TRUE)
+
+## CAL HbA1c ##
+CICAL6 <- matrix(NA,168,3)
+
+for (i in 1:168){
+  CICAL6[i,] <- quantile(CAL6init[i,], c(0.025,0.5,0.975))
+}
+
+CAL6_d1 <- as.matrix(CICAL5[,2]); CAL6_d2 <- matrix(NA, 168, 1)
+for (i in 1:168){
+  if (CAL6_d1[i,] > 0){
+    CAL6_d2[i,] <- CAL6_d1[i,] - CICAL6[i,1]
+  }
+  else {CAL6_d2[i,] <- CICAL6[i,3] - CAL6_d1[i,]}
+}
+CAL6map <- CAL6_d1/abs(CAL6_d2)
+CAL6map <- matrix(CAL6map, t,s)
+
+CAL6map <- levelplot(t(CAL6map),col.regions = Acol.regions,xlab="sites",ylab="teeth", at = c(-1000,-1.5,-0.8,0.8,1.5,1000),
+                     colorkey = FALSE, labels=as.character(c(-1000,-1.5,-0.8,0.8,1.5,1000)),
+                     margin=F, scales = list(draw = FALSE),main = "CAL_HbA1c")
+print(CAL6map, split = c(5, 2, 5, 2), more = TRUE)
+```
+
+Figure shows checkerboard pattern impeding straightforward interpretation.
+
+
+
+
+
+
+
+
+
+
+
+
