@@ -54,7 +54,7 @@ $\alpha_{i_1i_2i_3j}$ as
 \end{aligned}
 \end{equation}
 where $\gamma_0\ll\gamma_1$ and $\psi(u\mid\gamma) = (\gamma/2)exp(-\gamma|u|)$ is the mean-zero Laplace distribution. 
-%When $\gamma \ll \gamma_0$, tensor spike-and-slab lasso prior \eqref{eq:TSSL} closely retrieve to tensor spike-and-slab prior. 
+When $\gamma \ll \gamma_0$, tensor spike-and-slab lasso prior \eqref{eq:TSSL} closely retrieve to tensor spike-and-slab prior. 
 The large value of $\phi$ produces highly sparse elements in $\mathcal{A}$. 
 
 ## Tensor Normal prior
@@ -91,7 +91,6 @@ load("Result_BSTT_TSSL_CAL.rda")
 
 PPD_B.est <- PPD_BSTT_TSSL$B.est[2:6,,]
 CAL_B.est <- CAL_BSTT_TSSL$B.est[2:6,,]
-
 
 PPD2init <- as.matrix(PPD_B.est[1,,])
 PPD3init <- as.matrix(PPD_B.est[2,,])
