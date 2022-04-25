@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>A New Class of Skewed Tensor Distributions</title>
+
+<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">A New Class of Skewed Tensor Distributions</h1>
+
+
+
+<hr />
+<p>Inkoo Lee</p>
+<p>Last Updated - April 24, 2022</p>
+<div id="paper" class="section level2">
+<h2>Paper</h2>
+<ul>
+<li>Lee, I., Sinha, D., Mai, Q. &amp; Bandyopadhyay, D. (2021+). <em>A New Class of Skewed Tensor Distributions.</em> <a href="https://github.com/InkooLee/BSTT">[Github]</a></li>
+</ul>
+</div>
+<div id="skewed-tensor-response-model" class="section level2">
+<h2>Skewed tensor response model</h2>
+<p>For an order-<span class="math inline">\(K\)</span> tensor response <span class="math inline">\(\mathcal{Y}_i \in \mathbb{R}^{d_1 \times \cdots \times d_K}\)</span> with a vector of covariates <span class="math inline">\(\textbf{x}_i \in \mathbb{R}^p\)</span>, we consider a tensor response regression model <span class="math display">\[\begin{equation}\label{eq1}
+    \mathcal{Y}_{i} = \mathcal{B}\bar{\times}_{(K+1)} \textbf{x}_{i} + \mathcal{E}_{i},~~for~~ i=1,\ldots,n,~ 
+\end{equation}\]</span> where <span class="math inline">\(\mathcal{B} \in \mathbb{R}^{d_1 \times \cdots \times d_K \times p}\)</span> is an order-<span class="math inline">\((K+1)\)</span> unknown tensor of regression coefficients, <span class="math inline">\(\bar{\times}_{(K+1)}\)</span> is the <span class="math inline">\((K+1)\)</span>-mode vector product, and the error <span class="math inline">\(\mathcal{E}_{i} \in \mathbb{R}^{d_1 \times \cdots \times d_K}\)</span> is an order-<span class="math inline">\(K\)</span> tensor. We model the skewness in the distribution of <span class="math inline">\(\mathcal{Y}\)</span> via <span class="math display">\[\begin{equation}\label{eq2}
+ \mathcal{E}_{i} = |\mathcal{Z}_{2i}|\times_{K} \pmb{\Lambda} + \mathcal{Z}_{1i}, 
+\end{equation}\]</span> where <span class="math inline">\(\pmb{\Lambda} = diag(\lambda_1,\ldots,\lambda_{d_K}) \in \mathbb{R}^{d_K \times d_K}\)</span> with skewness parameters <span class="math inline">\(\pmb{\lambda}=(\lambda_1,\ldots,\lambda_{d_K})\)</span> and <span class="math inline">\(|\mathbf{M}|\)</span> denotes the matrix whose each element of is the absolute value of the corresponding element of matrix <span class="math inline">\(\mathbf{M}\)</span>.</p>
+</div>
+<div id="tensor-spike-and-slab-lasso-prior" class="section level2">
+<h2>Tensor Spike-and-Slab Lasso prior</h2>
+<p>To address the desired dimension reduction of the regression coefficient tensor <span class="math inline">\(\mathcal{B}\)</span> while ensuring practical clinical interpretation of covariate effects, we use <span class="math inline">\(\beta_{i_1i_2i_3j} = \eta_{i_3j} + \alpha_{i_1i_2i_3j}\)</span> to split the effect of <span class="math inline">\(j\)</span>-th covariate <span class="math inline">\(x_j\)</span> into overall effects <span class="math inline">\(\eta_{1j}\)</span> and <span class="math inline">\(\eta_{2j}\)</span> on two biomarkers and the difference <span class="math inline">\(\alpha_{i_1i_2i_3j}\)</span> of the effect of <span class="math inline">\(x_j\)</span> on biomarker <span class="math inline">\(i_3\)</span> from site <span class="math inline">\(i_2\)</span> of tooth <span class="math inline">\(i_1\)</span>. We use a common independent $ (0,^2)$ prior for each <span class="math inline">\(\eta_{i_3j}\)</span> and an independent spike-and-slab lasso based sparsity inducing prior <br />
+for tensor <span class="math inline">\(\mathcal{A}\in \mathbb{R}^{28\times 6\times 2\times 6}\)</span> with elements <span class="math inline">\(\alpha_{i_1i_2i_3j}\)</span> as <span class="math display">\[\begin{equation}\label{eq:TSSL}
+\begin{aligned}
+    &amp;\alpha_{i_1i_2i_3j} \overset{iid}{\sim} (1-\omega_{i_1i_2i_3j})\psi(\alpha_{i_1i_2i_3j}\mid\gamma_0) + \omega_{i_1i_2i_3j}\psi(\alpha_{i_1i_2i_3j}\mid\gamma),\\
+       &amp; \omega_{i_1i_2i_3j}\overset{iid}\sim \textit{Bernoulli}(\phi),
+\end{aligned}
+\end{equation}\]</span> where <span class="math inline">\(\gamma_0\ll\gamma_1\)</span> and <span class="math inline">\(\psi(u\mid\gamma) = (\gamma/2)exp(-\gamma|u|)\)</span> is the mean-zero Laplace distribution. %When <span class="math inline">\(\gamma \ll \gamma_0\)</span>, tensor spike-and-slab lasso prior  closely retrieve to tensor spike-and-slab prior. The large value of <span class="math inline">\(\phi\)</span> produces highly sparse elements in <span class="math inline">\(\mathcal{A}\)</span>.</p>
+</div>
+<div id="tensor-normal-prior" class="section level2">
+<h2>Tensor Normal prior</h2>
+<p>The alternative choice for <span class="math inline">\(\mathcal{B}\)</span> is tensor normal prior, <span class="math inline">\(\mathcal{B} \sim TN(\textbf{0},b\textbf{I}_{28}\)</span>, <span class="math inline">\(b\textbf{I}_6,b\textbf{I}_2,b\textbf{I}_6)\)</span> for some large <span class="math inline">\(b &gt; 0\)</span>.</p>
+</div>
+<div id="gaad-data-analysis-using-bstt-package" class="section level2">
+<h2>GAAD data analysis using <code>BSTT</code> package</h2>
+<p>We fit the BSTT (Bayesian skewed tensor-<span class="math inline">\(t\)</span>) model with tensor spike-and-slab lasso (TSSL)/Tensor Normal (TN) prior.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Load package</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(BSTT)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># n.burn = burn-in period, n.save = number of posterior samples, thin = thinning size</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>BSTT_TSSL <span class="ot">&lt;-</span> <span class="fu">BSTT_TSSL</span>(Y,X,vecy, <span class="at">n.burn =</span> <span class="dv">100</span>, <span class="at">n.save =</span> <span class="dv">1000</span>, <span class="at">thin =</span> <span class="dv">5</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>BSTT_TN <span class="ot">&lt;-</span> <span class="fu">BSTT_TN</span>(Y,X,vecy, <span class="at">n.burn =</span> <span class="dv">100</span>, <span class="at">n.save =</span> <span class="dv">1000</span>, <span class="at">thin =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div id="d-statistic" class="section level3">
+<h3>D-Statistic</h3>
+<p><span class="math inline">\(D = d_1/|d_2|\)</span> for each regression effects <span class="math inline">\(\mathcal{B}_{i_1i_2i_3j}\)</span>, where <span class="math inline">\(d_1\)</span> is distance of the Bayesian estimate (posterior median) from null value (0 here) and <span class="math inline">\(d_2\)</span> is the distance of the Bayes estimate from the nearest endpoint of the 95% CI of the parameter. Here, <span class="math inline">\(D &gt; 1.5\)</span> <span class="math inline">\((D &lt; -1.5)\)</span> implies strong posterior evidence of positive (negative) effect of covariate <span class="math inline">\(x_j\)</span> on the biomarker <span class="math inline">\(i_3\)</span> at site <span class="math inline">\(i_2\)</span> of tooth <span class="math inline">\(i_1\)</span>. Similarly, the range <span class="math inline">\(-0.8 &lt; D &lt; 0.8\)</span> suggests moderate evidence for null hypothesis, and <span class="math inline">\(0.8 \leq D \leq 1.5\)</span> represents moderate positive effect, and <span class="math inline">\(-1.5 \leq D \leq -0.8\)</span> denotes moderate negative effect of <span class="math inline">\(x_j\)</span> on <span class="math inline">\(\mathcal{Y}_{i_1i_2i_3}\)</span>.</p>
+<p>The following plot (Figure 2 in the main text) shows D-statistic map of tensor regression coefficients with TSSL prior.</p>
+<pre><code>##              [,1]        [,2]       [,3]        [,4]       [,5]      [,6]
+##  [1,]  0.35345356  0.35345356  2.6829495  0.35345356  0.3534536 2.9085702
+##  [2,]  0.32195001  0.35345356  1.1039780  0.35345356  0.3534536 2.5167271
+##  [3,]  0.35345356  0.16936880  0.3559807  0.35345356  0.9185723 3.3215196
+##  [4,]  0.03871404  0.35345356  2.0686650 -0.54448437  0.7663257 2.0570152
+##  [5,]  0.28333593 -0.13373708  1.0691597  0.35345356  0.3534536 0.3534536
+##  [6,]  0.35345356 -0.17941865  1.0827815  0.35345356 -0.1843807 1.0653417
+##  [7,]  0.35345356  0.35345356  2.5816156  0.35345356  0.3534536 0.3795634
+##  [8,]  0.35345356  0.35345356  0.5794776  0.23280286  0.3534536 0.3534536
+##  [9,] -0.04580234  0.01074011  1.8038192  0.35345356  0.3534536 1.8776255
+## [10,]  0.12573156  0.35345356  3.0486798  0.35345356  0.3534536 1.8072262
+## [11,]  0.35345356  0.35345356  2.2938717  0.35345356  0.3534536 4.8207522
+## [12,] -0.32896283  0.35345356  2.4868084  0.35345356  0.1445636 2.0396444
+## [13,]  0.35345356  0.35345356  0.3534536  0.35345356  0.3534536 2.8221045
+## [14,]  0.35345356  0.35345356  0.4881300  0.35345356  0.3534536 0.7805865
+## [15,]  0.24777089 -0.92470812  1.4682746  0.04198474 -0.5514965 1.6002915
+## [16,]  0.35345356  0.99376340  3.6107523  0.35345356  0.3534536 1.9154594
+## [17,]  0.35345356  0.13769916  3.3660938  0.35345356 -0.7154626 1.2396412
+## [18,]  0.75209164 -0.44266739  0.3534536  0.58916526  0.3534536 0.3534536
+## [19,]  0.35345356  0.35345356  0.3534536  0.35345356  0.3534536 0.3534536
+## [20,]  0.35345356  0.35345356 -0.3154366  1.38684210  0.3534536 0.3534536
+## [21,]  0.35345356  0.35345356  0.3534536  0.35345356  1.5928369 0.5879965
+## [22,]  0.35345356  0.35345356  0.3534536  1.50582529  1.3148538 1.8394876
+## [23,]  0.35345356  0.35345356 -0.5106339  1.20710020  0.8206210 3.2474094
+## [24,]  0.35345356  0.35345356  0.3534536  0.56830119  0.3534536 0.5724666
+## [25,]  0.35345356  0.35345356  1.2491640  0.35345356  0.3534536 0.3534536
+## [26,] -1.40583713 -0.65402427  1.8797894  0.35345356 -0.8968982 0.3587586
+## [27,]  0.35345356 -0.36442363  4.6787657  0.35345356 -2.3485878 1.7583300
+## [28,]  0.35345356 -3.31209747  1.3680713 -2.40551144 -3.2700427 0.3534536</code></pre>
+<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lattice)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;C:/Users/inkku/Downloads&quot;</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;Result_BSTT.rda&quot;</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>t <span class="ot">=</span> <span class="dv">28</span>; s <span class="ot">=</span> <span class="dv">6</span>; b <span class="ot">=</span> <span class="dv">2</span>;</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>PPD_B.est <span class="ot">&lt;-</span> result<span class="sc">$</span>B.est[<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>,<span class="dv">1</span><span class="sc">:</span>(t<span class="sc">*</span>s),]</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(PPD_B.est) </span></code></pre></div>
+<pre><code>## [1]   5 168 500</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>PPD2init <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(PPD_B.est[<span class="dv">1</span>,,])</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>PPD3init <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(PPD_B.est[<span class="dv">2</span>,,])</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>PPD4init <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(PPD_B.est[<span class="dv">3</span>,,])</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>PPD5init <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(PPD_B.est[<span class="dv">4</span>,,])</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>PPD6init <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(PPD_B.est[<span class="dv">5</span>,,])</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>CAL_B.est <span class="ot">&lt;-</span> result<span class="sc">$</span>B.est[<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>,(t<span class="sc">*</span>s <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>(t<span class="sc">*</span>s<span class="sc">*</span>b),]</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(CAL_B.est)</span></code></pre></div>
+<pre><code>## [1]   5 168 500</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>CAL2init <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(CAL_B.est[<span class="dv">1</span>,,])</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>CAL3init <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(CAL_B.est[<span class="dv">2</span>,,])</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>CAL4init <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(CAL_B.est[<span class="dv">3</span>,,])</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>CAL5init <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(CAL_B.est[<span class="dv">4</span>,,])</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>CAL6init <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(CAL_B.est[<span class="dv">5</span>,,])</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>Acol.regions <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;#FF80FFFF&quot;</span>,<span class="st">&quot;#FFB6C1&quot;</span>, <span class="st">&quot;#FFFFFF&quot;</span>, <span class="st">&quot;#BFFFFFFF&quot;</span>, <span class="st">&quot;#1E90FF&quot;</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="do">## PPD AGE ##</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>CIPPD2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>,<span class="dv">168</span>,<span class="dv">3</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">168</span>){</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  CIPPD2[i,] <span class="ot">&lt;-</span> <span class="fu">quantile</span>(PPD2init[i,], <span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.5</span>,<span class="fl">0.975</span>))</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>PPD2_d1 <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(CIPPD2[,<span class="dv">2</span>]); PPD2_d2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="dv">168</span>, <span class="dv">1</span>)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">168</span>){</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (PPD2_d1[i,] <span class="sc">&gt;</span> <span class="dv">0</span>){</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    PPD2_d2[i,] <span class="ot">&lt;-</span> PPD2_d1[i,] <span class="sc">-</span> CIPPD2[i,<span class="dv">1</span>]</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> {PPD2_d2[i,] <span class="ot">&lt;-</span> CIPPD2[i,<span class="dv">3</span>] <span class="sc">-</span> PPD2_d1[i,]}</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>PPD2map <span class="ot">&lt;-</span> PPD2_d1<span class="sc">/</span><span class="fu">abs</span>(PPD2_d2)</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>PPD2map <span class="ot">&lt;-</span> <span class="fu">matrix</span>(PPD2map, t,s)</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>PPD2map <span class="ot">&lt;-</span> <span class="fu">levelplot</span>(<span class="fu">t</span>(PPD2map),<span class="at">col.regions =</span> Acol.regions,<span class="at">xlab=</span><span class="st">&quot;sites&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;teeth&quot;</span>, <span class="at">at =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1000</span>,<span class="sc">-</span><span class="fl">1.5</span>,<span class="sc">-</span><span class="fl">0.8</span>,<span class="fl">0.8</span>,<span class="fl">1.5</span>,<span class="dv">1000</span>),</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>                     <span class="at">colorkey =</span> <span class="cn">FALSE</span>, <span class="at">labels=</span><span class="fu">as.character</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1000</span>,<span class="sc">-</span><span class="fl">1.5</span>,<span class="sc">-</span><span class="fl">0.8</span>,<span class="fl">0.8</span>,<span class="fl">1.5</span>,<span class="dv">1000</span>)),</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>                     <span class="at">margin=</span>F, <span class="at">scales =</span> <span class="fu">list</span>(<span class="at">draw =</span> <span class="cn">FALSE</span>),<span class="at">main =</span> <span class="st">&quot;PPD_Age&quot;</span>)</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(PPD2map, <span class="at">split =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">2</span>), <span class="at">more =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="do">## PPD Gender ##</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>CIPPD3 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>,<span class="dv">168</span>,<span class="dv">3</span>)</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">168</span>){</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>  CIPPD3[i,] <span class="ot">&lt;-</span> <span class="fu">quantile</span>(PPD3init[i,], <span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.5</span>,<span class="fl">0.975</span>))</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>PPD3_d1 <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(CIPPD3[,<span class="dv">2</span>]); PPD3_d2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="dv">168</span>, <span class="dv">1</span>)</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">168</span>){</span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (PPD3_d1[i,] <span class="sc">&gt;</span> <span class="dv">0</span>){</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>    PPD3_d2[i,] <span class="ot">&lt;-</span> PPD3_d1[i,] <span class="sc">-</span> CIPPD3[i,<span class="dv">1</span>]</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> {PPD3_d2[i,] <span class="ot">&lt;-</span> CIPPD3[i,<span class="dv">3</span>] <span class="sc">-</span> PPD3_d1[i,]}</span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>PPD3map <span class="ot">&lt;-</span> PPD3_d1<span class="sc">/</span><span class="fu">abs</span>(PPD3_d2)</span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>PPD3map <span class="ot">&lt;-</span> <span class="fu">matrix</span>(PPD3map, t,s)</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>PPD3map <span class="ot">&lt;-</span> <span class="fu">levelplot</span>(<span class="fu">t</span>(PPD3map),<span class="at">col.regions =</span> Acol.regions,<span class="at">xlab=</span><span class="st">&quot;sites&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;teeth&quot;</span>, <span class="at">at =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1000</span>,<span class="sc">-</span><span class="fl">1.5</span>,<span class="sc">-</span><span class="fl">0.8</span>,<span class="fl">0.8</span>,<span class="fl">1.5</span>,<span class="dv">1000</span>),</span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>                     <span class="at">colorkey =</span> <span class="cn">FALSE</span>, <span class="at">labels=</span><span class="fu">as.character</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1000</span>,<span class="sc">-</span><span class="fl">1.5</span>,<span class="sc">-</span><span class="fl">0.8</span>,<span class="fl">0.8</span>,<span class="fl">1.5</span>,<span class="dv">1000</span>)),</span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>                     <span class="at">margin=</span>F, <span class="at">scales =</span> <span class="fu">list</span>(<span class="at">draw =</span> <span class="cn">FALSE</span>),<span class="at">main =</span> <span class="st">&quot;PPD_Gender&quot;</span>)</span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(PPD3map, <span class="at">split =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">2</span>), <span class="at">more =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a><span class="do">## PPD BMI ##</span></span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>CIPPD4 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>,<span class="dv">168</span>,<span class="dv">3</span>)</span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">168</span>){</span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>  CIPPD4[i,] <span class="ot">&lt;-</span> <span class="fu">quantile</span>(PPD4init[i,], <span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.5</span>,<span class="fl">0.975</span>))</span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a>PPD4_d1 <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(CIPPD4[,<span class="dv">2</span>]); PPD4_d2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="dv">168</span>, <span class="dv">1</span>)</span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">168</span>){</span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (PPD4_d1[i,] <span class="sc">&gt;</span> <span class="dv">0</span>){</span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>    PPD4_d2[i,] <span class="ot">&lt;-</span> PPD4_d1[i,] <span class="sc">-</span> CIPPD4[i,<span class="dv">1</span>]</span>
+<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> {PPD4_d2[i,] <span class="ot">&lt;-</span> CIPPD4[i,<span class="dv">3</span>] <span class="sc">-</span> PPD4_d1[i,]}</span>
+<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a>PPD4map <span class="ot">&lt;-</span> PPD4_d1<span class="sc">/</span><span class="fu">abs</span>(PPD4_d2)</span>
+<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a>PPD4map <span class="ot">&lt;-</span> <span class="fu">matrix</span>(PPD4map, t,s)</span>
+<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a>PPD4map <span class="ot">&lt;-</span> <span class="fu">levelplot</span>(<span class="fu">t</span>(PPD4map),<span class="at">col.regions =</span> Acol.regions,<span class="at">xlab=</span><span class="st">&quot;sites&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;teeth&quot;</span>, <span class="at">at =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1000</span>,<span class="sc">-</span><span class="fl">1.5</span>,<span class="sc">-</span><span class="fl">0.8</span>,<span class="fl">0.8</span>,<span class="fl">1.5</span>,<span class="dv">1000</span>),</span>
+<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a>                     <span class="at">colorkey =</span> <span class="cn">FALSE</span>, <span class="at">labels=</span><span class="fu">as.character</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1000</span>,<span class="sc">-</span><span class="fl">1.5</span>,<span class="sc">-</span><span class="fl">0.8</span>,<span class="fl">0.8</span>,<span class="fl">1.5</span>,<span class="dv">1000</span>)),</span>
+<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a>                     <span class="at">margin=</span>F, <span class="at">scales =</span> <span class="fu">list</span>(<span class="at">draw =</span> <span class="cn">FALSE</span>),<span class="at">main =</span> <span class="st">&quot;PPD_BMI&quot;</span>)</span>
+<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(PPD4map, <span class="at">split =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">2</span>), <span class="at">more =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a><span class="do">## PPD Smoker ##</span></span>
+<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a>CIPPD5 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>,<span class="dv">168</span>,<span class="dv">3</span>)</span>
+<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">168</span>){</span>
+<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a>  CIPPD5[i,] <span class="ot">&lt;-</span> <span class="fu">quantile</span>(PPD5init[i,], <span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.5</span>,<span class="fl">0.975</span>))</span>
+<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a>PPD5_d1 <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(CIPPD5[,<span class="dv">2</span>]); PPD5_d2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="dv">168</span>, <span class="dv">1</span>)</span>
+<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">168</span>){</span>
+<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (PPD5_d1[i,] <span class="sc">&gt;</span> <span class="dv">0</span>){</span>
+<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a>    PPD5_d2[i,] <span class="ot">&lt;-</span> PPD5_d1[i,] <span class="sc">-</span> CIPPD5[i,<span class="dv">1</span>]</span>
+<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> {PPD5_d2[i,] <span class="ot">&lt;-</span> CIPPD5[i,<span class="dv">3</span>] <span class="sc">-</span> PPD5_d1[i,]}</span>
+<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a>PPD5map <span class="ot">&lt;-</span> PPD5_d1<span class="sc">/</span><span class="fu">abs</span>(PPD5_d2)</span>
+<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a>PPD5map <span class="ot">&lt;-</span> <span class="fu">matrix</span>(PPD5map, t,s)</span>
+<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a>PPD5map <span class="ot">&lt;-</span> <span class="fu">levelplot</span>(<span class="fu">t</span>(PPD5map),<span class="at">col.regions =</span> Acol.regions,<span class="at">xlab=</span><span class="st">&quot;sites&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;teeth&quot;</span>, <span class="at">at =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1000</span>,<span class="sc">-</span><span class="fl">1.5</span>,<span class="sc">-</span><span class="fl">0.8</span>,<span class="fl">0.8</span>,<span class="fl">1.5</span>,<span class="dv">1000</span>),</span>
+<span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a>                     <span class="at">colorkey =</span> <span class="cn">FALSE</span>, <span class="at">labels=</span><span class="fu">as.character</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1000</span>,<span class="sc">-</span><span class="fl">1.5</span>,<span class="sc">-</span><span class="fl">0.8</span>,<span class="fl">0.8</span>,<span class="fl">1.5</span>,<span class="dv">1000</span>)),</span>
+<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a>                     <span class="at">margin=</span>F, <span class="at">scales =</span> <span class="fu">list</span>(<span class="at">draw =</span> <span class="cn">FALSE</span>),<span class="at">main =</span> <span class="st">&quot;PPD_Smoker&quot;</span>)</span>
+<span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(PPD5map, <span class="at">split =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">2</span>), <span class="at">more =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a><span class="do">## PPD HbA1c ##</span></span>
+<span id="cb7-101"><a href="#cb7-101" aria-hidden="true" tabindex="-1"></a>CIPPD6 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>,<span class="dv">168</span>,<span class="dv">3</span>)</span>
+<span id="cb7-102"><a href="#cb7-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-103"><a href="#cb7-103" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">168</span>){</span>
+<span id="cb7-104"><a href="#cb7-104" aria-hidden="true" tabindex="-1"></a>  CIPPD6[i,] <span class="ot">&lt;-</span> <span class="fu">quantile</span>(PPD6init[i,], <span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.5</span>,<span class="fl">0.975</span>))</span>
+<span id="cb7-105"><a href="#cb7-105" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a>PPD6_d1 <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(CIPPD6[,<span class="dv">2</span>]); PPD6_d2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="dv">168</span>, <span class="dv">1</span>)</span>
+<span id="cb7-108"><a href="#cb7-108" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">168</span>){</span>
+<span id="cb7-109"><a href="#cb7-109" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (PPD6_d1[i,] <span class="sc">&gt;</span> <span class="dv">0</span>){</span>
+<span id="cb7-110"><a href="#cb7-110" aria-hidden="true" tabindex="-1"></a>    PPD6_d2[i,] <span class="ot">&lt;-</span> PPD6_d1[i,] <span class="sc">-</span> CIPPD6[i,<span class="dv">1</span>]</span>
+<span id="cb7-111"><a href="#cb7-111" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-112"><a href="#cb7-112" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> {PPD6_d2[i,] <span class="ot">&lt;-</span> CIPPD6[i,<span class="dv">3</span>] <span class="sc">-</span> PPD6_d1[i,]}</span>
+<span id="cb7-113"><a href="#cb7-113" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-114"><a href="#cb7-114" aria-hidden="true" tabindex="-1"></a>PPD6map <span class="ot">&lt;-</span> PPD6_d1<span class="sc">/</span><span class="fu">abs</span>(PPD6_d2)</span>
+<span id="cb7-115"><a href="#cb7-115" aria-hidden="true" tabindex="-1"></a>PPD6map <span class="ot">&lt;-</span> <span class="fu">matrix</span>(PPD6map, t,s)</span>
+<span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-117"><a href="#cb7-117" aria-hidden="true" tabindex="-1"></a>PPD6map <span class="ot">&lt;-</span> <span class="fu">levelplot</span>(<span class="fu">t</span>(PPD6map),<span class="at">col.regions =</span> Acol.regions,<span class="at">xlab=</span><span class="st">&quot;sites&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;teeth&quot;</span>, <span class="at">at =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1000</span>,<span class="sc">-</span><span class="fl">1.5</span>,<span class="sc">-</span><span class="fl">0.8</span>,<span class="fl">0.8</span>,<span class="fl">1.5</span>,<span class="dv">1000</span>),</span>
+<span id="cb7-118"><a href="#cb7-118" aria-hidden="true" tabindex="-1"></a>                     <span class="at">colorkey =</span> <span class="cn">FALSE</span>, <span class="at">labels=</span><span class="fu">as.character</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1000</span>,<span class="sc">-</span><span class="fl">1.5</span>,<span class="sc">-</span><span class="fl">0.8</span>,<span class="fl">0.8</span>,<span class="fl">1.5</span>,<span class="dv">1000</span>)),</span>
+<span id="cb7-119"><a href="#cb7-119" aria-hidden="true" tabindex="-1"></a>                     <span class="at">margin=</span>F, <span class="at">scales =</span> <span class="fu">list</span>(<span class="at">draw =</span> <span class="cn">FALSE</span>),<span class="at">main =</span> <span class="st">&quot;PPD_HbA1c&quot;</span>)</span>
+<span id="cb7-120"><a href="#cb7-120" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(PPD6map, <span class="at">split =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">2</span>), <span class="at">more =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-121"><a href="#cb7-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-122"><a href="#cb7-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-123"><a href="#cb7-123" aria-hidden="true" tabindex="-1"></a><span class="do">## CAL AGE ##</span></span>
+<span id="cb7-124"><a href="#cb7-124" aria-hidden="true" tabindex="-1"></a>CICAL2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>,<span class="dv">168</span>,<span class="dv">3</span>)</span>
+<span id="cb7-125"><a href="#cb7-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-126"><a href="#cb7-126" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">168</span>){</span>
+<span id="cb7-127"><a href="#cb7-127" aria-hidden="true" tabindex="-1"></a>  CICAL2[i,] <span class="ot">&lt;-</span> <span class="fu">quantile</span>(CAL2init[i,], <span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.5</span>,<span class="fl">0.975</span>))</span>
+<span id="cb7-128"><a href="#cb7-128" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-129"><a href="#cb7-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-130"><a href="#cb7-130" aria-hidden="true" tabindex="-1"></a>CAL2_d1 <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(CICAL2[,<span class="dv">2</span>]); CAL2_d2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="dv">168</span>, <span class="dv">1</span>)</span>
+<span id="cb7-131"><a href="#cb7-131" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">168</span>){</span>
+<span id="cb7-132"><a href="#cb7-132" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (CAL2_d1[i,] <span class="sc">&gt;</span> <span class="dv">0</span>){</span>
+<span id="cb7-133"><a href="#cb7-133" aria-hidden="true" tabindex="-1"></a>    CAL2_d2[i,] <span class="ot">&lt;-</span> CAL2_d1[i,] <span class="sc">-</span> CICAL2[i,<span class="dv">1</span>]</span>
+<span id="cb7-134"><a href="#cb7-134" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-135"><a href="#cb7-135" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> {CAL2_d2[i,] <span class="ot">&lt;-</span> CICAL2[i,<span class="dv">3</span>] <span class="sc">-</span> CAL2_d1[i,]}</span>
+<span id="cb7-136"><a href="#cb7-136" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-137"><a href="#cb7-137" aria-hidden="true" tabindex="-1"></a>CAL2map <span class="ot">&lt;-</span> CAL2_d1<span class="sc">/</span><span class="fu">abs</span>(CAL2_d2)</span>
+<span id="cb7-138"><a href="#cb7-138" aria-hidden="true" tabindex="-1"></a>CAL2map <span class="ot">&lt;-</span> <span class="fu">matrix</span>(CAL2map, t,s)</span>
+<span id="cb7-139"><a href="#cb7-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-140"><a href="#cb7-140" aria-hidden="true" tabindex="-1"></a>CAL2map <span class="ot">&lt;-</span> <span class="fu">levelplot</span>(<span class="fu">t</span>(CAL2map),<span class="at">col.regions =</span> Acol.regions,<span class="at">xlab=</span><span class="st">&quot;sites&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;teeth&quot;</span>, <span class="at">at =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1000</span>,<span class="sc">-</span><span class="fl">1.5</span>,<span class="sc">-</span><span class="fl">0.8</span>,<span class="fl">0.8</span>,<span class="fl">1.5</span>,<span class="dv">1000</span>),</span>
+<span id="cb7-141"><a href="#cb7-141" aria-hidden="true" tabindex="-1"></a>                     <span class="at">colorkey =</span> <span class="cn">FALSE</span>, <span class="at">labels=</span><span class="fu">as.character</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1000</span>,<span class="sc">-</span><span class="fl">1.5</span>,<span class="sc">-</span><span class="fl">0.8</span>,<span class="fl">0.8</span>,<span class="fl">1.5</span>,<span class="dv">1000</span>)),</span>
+<span id="cb7-142"><a href="#cb7-142" aria-hidden="true" tabindex="-1"></a>                     <span class="at">margin=</span>F, <span class="at">scales =</span> <span class="fu">list</span>(<span class="at">draw =</span> <span class="cn">FALSE</span>),<span class="at">main =</span> <span class="st">&quot;CAL_Age&quot;</span>)</span>
+<span id="cb7-143"><a href="#cb7-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-144"><a href="#cb7-144" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(CAL2map, <span class="at">split =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">2</span>), <span class="at">more =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-145"><a href="#cb7-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-146"><a href="#cb7-146" aria-hidden="true" tabindex="-1"></a><span class="do">## CAL Gender ##</span></span>
+<span id="cb7-147"><a href="#cb7-147" aria-hidden="true" tabindex="-1"></a>CICAL3 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>,<span class="dv">168</span>,<span class="dv">3</span>)</span>
+<span id="cb7-148"><a href="#cb7-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-149"><a href="#cb7-149" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">168</span>){</span>
+<span id="cb7-150"><a href="#cb7-150" aria-hidden="true" tabindex="-1"></a>  CICAL3[i,] <span class="ot">&lt;-</span> <span class="fu">quantile</span>(CAL3init[i,], <span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.5</span>,<span class="fl">0.975</span>))</span>
+<span id="cb7-151"><a href="#cb7-151" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-152"><a href="#cb7-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-153"><a href="#cb7-153" aria-hidden="true" tabindex="-1"></a>CAL3_d1 <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(CICAL3[,<span class="dv">2</span>]); CAL3_d2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="dv">168</span>, <span class="dv">1</span>)</span>
+<span id="cb7-154"><a href="#cb7-154" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">168</span>){</span>
+<span id="cb7-155"><a href="#cb7-155" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (CAL3_d1[i,] <span class="sc">&gt;</span> <span class="dv">0</span>){</span>
+<span id="cb7-156"><a href="#cb7-156" aria-hidden="true" tabindex="-1"></a>    CAL3_d2[i,] <span class="ot">&lt;-</span> CAL3_d1[i,] <span class="sc">-</span> CICAL3[i,<span class="dv">1</span>]</span>
+<span id="cb7-157"><a href="#cb7-157" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-158"><a href="#cb7-158" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> {CAL3_d2[i,] <span class="ot">&lt;-</span> CICAL3[i,<span class="dv">3</span>] <span class="sc">-</span> CAL3_d1[i,]}</span>
+<span id="cb7-159"><a href="#cb7-159" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-160"><a href="#cb7-160" aria-hidden="true" tabindex="-1"></a>CAL3map <span class="ot">&lt;-</span> CAL3_d1<span class="sc">/</span><span class="fu">abs</span>(CAL3_d2)</span>
+<span id="cb7-161"><a href="#cb7-161" aria-hidden="true" tabindex="-1"></a>CAL3map <span class="ot">&lt;-</span> <span class="fu">matrix</span>(CAL3map, t,s)</span>
+<span id="cb7-162"><a href="#cb7-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-163"><a href="#cb7-163" aria-hidden="true" tabindex="-1"></a>CAL3map <span class="ot">&lt;-</span> <span class="fu">levelplot</span>(<span class="fu">t</span>(CAL3map),<span class="at">col.regions =</span> Acol.regions,<span class="at">xlab=</span><span class="st">&quot;sites&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;teeth&quot;</span>, <span class="at">at =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1000</span>,<span class="sc">-</span><span class="fl">1.5</span>,<span class="sc">-</span><span class="fl">0.8</span>,<span class="fl">0.8</span>,<span class="fl">1.5</span>,<span class="dv">1000</span>),</span>
+<span id="cb7-164"><a href="#cb7-164" aria-hidden="true" tabindex="-1"></a>                     <span class="at">colorkey =</span> <span class="cn">FALSE</span>, <span class="at">labels=</span><span class="fu">as.character</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1000</span>,<span class="sc">-</span><span class="fl">1.5</span>,<span class="sc">-</span><span class="fl">0.8</span>,<span class="fl">0.8</span>,<span class="fl">1.5</span>,<span class="dv">1000</span>)),</span>
+<span id="cb7-165"><a href="#cb7-165" aria-hidden="true" tabindex="-1"></a>                     <span class="at">margin=</span>F, <span class="at">scales =</span> <span class="fu">list</span>(<span class="at">draw =</span> <span class="cn">FALSE</span>),<span class="at">main =</span> <span class="st">&quot;CAL_Gender&quot;</span>)</span>
+<span id="cb7-166"><a href="#cb7-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-167"><a href="#cb7-167" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(CAL3map, <span class="at">split =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">2</span>), <span class="at">more =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-168"><a href="#cb7-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-169"><a href="#cb7-169" aria-hidden="true" tabindex="-1"></a><span class="do">## CAL BMI ##</span></span>
+<span id="cb7-170"><a href="#cb7-170" aria-hidden="true" tabindex="-1"></a>CICAL4 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>,<span class="dv">168</span>,<span class="dv">3</span>)</span>
+<span id="cb7-171"><a href="#cb7-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-172"><a href="#cb7-172" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">168</span>){</span>
+<span id="cb7-173"><a href="#cb7-173" aria-hidden="true" tabindex="-1"></a>  CICAL4[i,] <span class="ot">&lt;-</span> <span class="fu">quantile</span>(CAL4init[i,], <span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.5</span>,<span class="fl">0.975</span>))</span>
+<span id="cb7-174"><a href="#cb7-174" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-175"><a href="#cb7-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-176"><a href="#cb7-176" aria-hidden="true" tabindex="-1"></a>CAL4_d1 <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(CICAL4[,<span class="dv">2</span>]); CAL4_d2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="dv">168</span>, <span class="dv">1</span>)</span>
+<span id="cb7-177"><a href="#cb7-177" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">168</span>){</span>
+<span id="cb7-178"><a href="#cb7-178" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (CAL4_d1[i,] <span class="sc">&gt;</span> <span class="dv">0</span>){</span>
+<span id="cb7-179"><a href="#cb7-179" aria-hidden="true" tabindex="-1"></a>    CAL4_d2[i,] <span class="ot">&lt;-</span> CAL4_d1[i,] <span class="sc">-</span> CICAL4[i,<span class="dv">1</span>]</span>
+<span id="cb7-180"><a href="#cb7-180" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-181"><a href="#cb7-181" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> {CAL4_d2[i,] <span class="ot">&lt;-</span> CICAL4[i,<span class="dv">3</span>] <span class="sc">-</span> CAL4_d1[i,]}</span>
+<span id="cb7-182"><a href="#cb7-182" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-183"><a href="#cb7-183" aria-hidden="true" tabindex="-1"></a>CAL4map <span class="ot">&lt;-</span> CAL4_d1<span class="sc">/</span><span class="fu">abs</span>(CAL4_d2)</span>
+<span id="cb7-184"><a href="#cb7-184" aria-hidden="true" tabindex="-1"></a>CAL4map <span class="ot">&lt;-</span> <span class="fu">matrix</span>(CAL4map, t,s)</span>
+<span id="cb7-185"><a href="#cb7-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-186"><a href="#cb7-186" aria-hidden="true" tabindex="-1"></a>CAL4map <span class="ot">&lt;-</span> <span class="fu">levelplot</span>(<span class="fu">t</span>(CAL4map),<span class="at">col.regions =</span> Acol.regions,<span class="at">xlab=</span><span class="st">&quot;sites&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;teeth&quot;</span>, <span class="at">at =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1000</span>,<span class="sc">-</span><span class="fl">1.5</span>,<span class="sc">-</span><span class="fl">0.8</span>,<span class="fl">0.8</span>,<span class="fl">1.5</span>,<span class="dv">1000</span>),</span>
+<span id="cb7-187"><a href="#cb7-187" aria-hidden="true" tabindex="-1"></a>                     <span class="at">colorkey =</span> <span class="cn">FALSE</span>, <span class="at">labels=</span><span class="fu">as.character</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1000</span>,<span class="sc">-</span><span class="fl">1.5</span>,<span class="sc">-</span><span class="fl">0.8</span>,<span class="fl">0.8</span>,<span class="fl">1.5</span>,<span class="dv">1000</span>)),</span>
+<span id="cb7-188"><a href="#cb7-188" aria-hidden="true" tabindex="-1"></a>                     <span class="at">margin=</span>F, <span class="at">scales =</span> <span class="fu">list</span>(<span class="at">draw =</span> <span class="cn">FALSE</span>),<span class="at">main =</span> <span class="st">&quot;CAL_BMI&quot;</span>)</span>
+<span id="cb7-189"><a href="#cb7-189" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(CAL4map, <span class="at">split =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">2</span>), <span class="at">more =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-190"><a href="#cb7-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-191"><a href="#cb7-191" aria-hidden="true" tabindex="-1"></a><span class="do">## CAL Smoker ##</span></span>
+<span id="cb7-192"><a href="#cb7-192" aria-hidden="true" tabindex="-1"></a>CICAL5 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>,<span class="dv">168</span>,<span class="dv">3</span>)</span>
+<span id="cb7-193"><a href="#cb7-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-194"><a href="#cb7-194" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">168</span>){</span>
+<span id="cb7-195"><a href="#cb7-195" aria-hidden="true" tabindex="-1"></a>  CICAL5[i,] <span class="ot">&lt;-</span> <span class="fu">quantile</span>(CAL5init[i,], <span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.5</span>,<span class="fl">0.975</span>))</span>
+<span id="cb7-196"><a href="#cb7-196" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-197"><a href="#cb7-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-198"><a href="#cb7-198" aria-hidden="true" tabindex="-1"></a>CAL5_d1 <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(CICAL5[,<span class="dv">2</span>]); CAL5_d2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="dv">168</span>, <span class="dv">1</span>)</span>
+<span id="cb7-199"><a href="#cb7-199" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">168</span>){</span>
+<span id="cb7-200"><a href="#cb7-200" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (CAL5_d1[i,] <span class="sc">&gt;</span> <span class="dv">0</span>){</span>
+<span id="cb7-201"><a href="#cb7-201" aria-hidden="true" tabindex="-1"></a>    CAL5_d2[i,] <span class="ot">&lt;-</span> CAL5_d1[i,] <span class="sc">-</span> CICAL5[i,<span class="dv">1</span>]</span>
+<span id="cb7-202"><a href="#cb7-202" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-203"><a href="#cb7-203" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> {CAL5_d2[i,] <span class="ot">&lt;-</span> CICAL5[i,<span class="dv">3</span>] <span class="sc">-</span> CAL5_d1[i,]}</span>
+<span id="cb7-204"><a href="#cb7-204" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-205"><a href="#cb7-205" aria-hidden="true" tabindex="-1"></a>CAL5map <span class="ot">&lt;-</span> CAL5_d1<span class="sc">/</span><span class="fu">abs</span>(CAL5_d2)</span>
+<span id="cb7-206"><a href="#cb7-206" aria-hidden="true" tabindex="-1"></a>CAL5map <span class="ot">&lt;-</span> <span class="fu">matrix</span>(CAL5map, t,s)</span>
+<span id="cb7-207"><a href="#cb7-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-208"><a href="#cb7-208" aria-hidden="true" tabindex="-1"></a>CAL5map <span class="ot">&lt;-</span> <span class="fu">levelplot</span>(<span class="fu">t</span>(CAL5map),<span class="at">col.regions =</span> Acol.regions,<span class="at">xlab=</span><span class="st">&quot;sites&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;teeth&quot;</span>, <span class="at">at =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1000</span>,<span class="sc">-</span><span class="fl">1.5</span>,<span class="sc">-</span><span class="fl">0.8</span>,<span class="fl">0.8</span>,<span class="fl">1.5</span>,<span class="dv">1000</span>),</span>
+<span id="cb7-209"><a href="#cb7-209" aria-hidden="true" tabindex="-1"></a>                     <span class="at">colorkey =</span> <span class="cn">FALSE</span>, <span class="at">labels=</span><span class="fu">as.character</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1000</span>,<span class="sc">-</span><span class="fl">1.5</span>,<span class="sc">-</span><span class="fl">0.8</span>,<span class="fl">0.8</span>,<span class="fl">1.5</span>,<span class="dv">1000</span>)),</span>
+<span id="cb7-210"><a href="#cb7-210" aria-hidden="true" tabindex="-1"></a>                     <span class="at">margin=</span>F, <span class="at">scales =</span> <span class="fu">list</span>(<span class="at">draw =</span> <span class="cn">FALSE</span>),<span class="at">main =</span> <span class="st">&quot;CAL_Smoker&quot;</span>)</span>
+<span id="cb7-211"><a href="#cb7-211" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(CAL5map, <span class="at">split =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">2</span>), <span class="at">more =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-212"><a href="#cb7-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-213"><a href="#cb7-213" aria-hidden="true" tabindex="-1"></a><span class="do">## CAL HbA1c ##</span></span>
+<span id="cb7-214"><a href="#cb7-214" aria-hidden="true" tabindex="-1"></a>CICAL6 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>,<span class="dv">168</span>,<span class="dv">3</span>)</span>
+<span id="cb7-215"><a href="#cb7-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-216"><a href="#cb7-216" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">168</span>){</span>
+<span id="cb7-217"><a href="#cb7-217" aria-hidden="true" tabindex="-1"></a>  CICAL6[i,] <span class="ot">&lt;-</span> <span class="fu">quantile</span>(CAL6init[i,], <span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.5</span>,<span class="fl">0.975</span>))</span>
+<span id="cb7-218"><a href="#cb7-218" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-219"><a href="#cb7-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-220"><a href="#cb7-220" aria-hidden="true" tabindex="-1"></a>CAL6_d1 <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(CICAL5[,<span class="dv">2</span>]); CAL6_d2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="dv">168</span>, <span class="dv">1</span>)</span>
+<span id="cb7-221"><a href="#cb7-221" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">168</span>){</span>
+<span id="cb7-222"><a href="#cb7-222" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (CAL6_d1[i,] <span class="sc">&gt;</span> <span class="dv">0</span>){</span>
+<span id="cb7-223"><a href="#cb7-223" aria-hidden="true" tabindex="-1"></a>    CAL6_d2[i,] <span class="ot">&lt;-</span> CAL6_d1[i,] <span class="sc">-</span> CICAL6[i,<span class="dv">1</span>]</span>
+<span id="cb7-224"><a href="#cb7-224" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-225"><a href="#cb7-225" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> {CAL6_d2[i,] <span class="ot">&lt;-</span> CICAL6[i,<span class="dv">3</span>] <span class="sc">-</span> CAL6_d1[i,]}</span>
+<span id="cb7-226"><a href="#cb7-226" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-227"><a href="#cb7-227" aria-hidden="true" tabindex="-1"></a>CAL6map <span class="ot">&lt;-</span> CAL6_d1<span class="sc">/</span><span class="fu">abs</span>(CAL6_d2)</span>
+<span id="cb7-228"><a href="#cb7-228" aria-hidden="true" tabindex="-1"></a>CAL6map <span class="ot">&lt;-</span> <span class="fu">matrix</span>(CAL6map, t,s)</span>
+<span id="cb7-229"><a href="#cb7-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-230"><a href="#cb7-230" aria-hidden="true" tabindex="-1"></a>CAL6map <span class="ot">&lt;-</span> <span class="fu">levelplot</span>(<span class="fu">t</span>(CAL6map),<span class="at">col.regions =</span> Acol.regions,<span class="at">xlab=</span><span class="st">&quot;sites&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;teeth&quot;</span>, <span class="at">at =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1000</span>,<span class="sc">-</span><span class="fl">1.5</span>,<span class="sc">-</span><span class="fl">0.8</span>,<span class="fl">0.8</span>,<span class="fl">1.5</span>,<span class="dv">1000</span>),</span>
+<span id="cb7-231"><a href="#cb7-231" aria-hidden="true" tabindex="-1"></a>                     <span class="at">colorkey =</span> <span class="cn">FALSE</span>, <span class="at">labels=</span><span class="fu">as.character</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1000</span>,<span class="sc">-</span><span class="fl">1.5</span>,<span class="sc">-</span><span class="fl">0.8</span>,<span class="fl">0.8</span>,<span class="fl">1.5</span>,<span class="dv">1000</span>)),</span>
+<span id="cb7-232"><a href="#cb7-232" aria-hidden="true" tabindex="-1"></a>                     <span class="at">margin=</span>F, <span class="at">scales =</span> <span class="fu">list</span>(<span class="at">draw =</span> <span class="cn">FALSE</span>),<span class="at">main =</span> <span class="st">&quot;CAL_HbA1c&quot;</span>)</span>
+<span id="cb7-233"><a href="#cb7-233" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(CAL6map, <span class="at">split =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">2</span>), <span class="at">more =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
+<p>Figure shows checkerboard pattern impeding straightforward interpretation.</p>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
