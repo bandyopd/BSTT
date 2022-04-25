@@ -44,9 +44,8 @@ of covariate effects, we use $\beta_{i_1i_2i_3j} = \eta_{i_3j} + \alpha_{i_1i_2i
 the effect of $j$-th covariate $x_j$ into overall effects $\eta_{1j}$ and $\eta_{2j}$ on two biomarkers and the difference 
 $\alpha_{i_1i_2i_3j}$ of the effect of $x_j$ on 
 biomarker $i_3$ from site $i_2$ of tooth $i_1$.
-We use a common independent $ \textit{N}(0,\tau^2)$ prior for each $\eta_{i_3j}$ and an 
-independent spike-and-slab lasso based sparsity inducing prior \citep{rovckova2018spike}  
-for tensor $\mathcal{A}\in \mathbb{R}^{28\times 6\times 2\times 6}$ with elements 
+We use a common independent $\textit{N}(0,\tau^2)$ prior for each $\eta_{i_3j}$ and an 
+independent spike-and-slab lasso based sparsity inducing prior \citep{rovckova2018spike} for tensor $\mathcal{A}\in \mathbb{R}^{28\times 6\times 2\times 6}$ with elements 
 $\alpha_{i_1i_2i_3j}$ as
 \begin{equation}\label{eq:TSSL}
 \begin{aligned}
@@ -130,7 +129,7 @@ PPD2map <- PPD2_d1/abs(PPD2_d2)
 PPD2map <- matrix(PPD2map, t,s)
 PPD2map <- levelplot(t(PPD2map),col.regions = Acol.regions,xlab="sites",ylab="teeth", at = c(-100,-4,-3.2,1,1.5,100),
                      colorkey = FALSE, labels=as.character(c(-100,-4,-3.2,1,1.5,100)),
-                     margin=F, scales = list(draw = FALSE),main = "PPD_Age")
+                     margin=F, scales = list(draw = FALSE),main = list(label = "PPD_Age", cex = 1))
 
 print(PPD2map, split = c(1, 1, 5, 2), more = TRUE)
 
@@ -152,7 +151,7 @@ PPD3map <- PPD3_d1/abs(PPD3_d2)
 PPD3map <- matrix(PPD3map, t,s)
 PPD3map <- levelplot(t(PPD3map),col.regions = Acol.regions,xlab="sites",ylab="teeth", at = c(-10,-1.5,-0.75,0.75,1.5,4),
                      colorkey = FALSE, labels=as.character(c(-10,-1.5,-0.75,0.75,1.5,4)),
-                     margin=F, scales = list(draw = FALSE),main = "PPD_Gender")
+                     margin=F, scales = list(draw = FALSE),main = list(label = "PPD_Gender", cex = 1))
 
 print(PPD3map, split = c(2, 1, 5, 2), more = TRUE)
 
@@ -175,7 +174,7 @@ PPD4map <- PPD4_d1/abs(PPD4_d2)
 PPD4map <- matrix(PPD4map, t,s)
 PPD4map <- levelplot(t(PPD4map),col.regions = Acol.regions,xlab="sites",ylab="teeth", at = c(-4,-1.5,-0.9,0.9,1.5,4),
                      colorkey = FALSE, labels=as.character(c(-4,-1.5,-0.9,0.9,1.5,4)),
-                     margin=F, scales = list(draw = FALSE),main = "PPD_BMI")
+                     margin=F, scales = list(draw = FALSE),main = list(label = "PPD_BMI", cex = 1))
 print(PPD4map, split = c(3, 1, 5, 2), more = TRUE)
 
 
@@ -199,7 +198,7 @@ PPD5map <- PPD5_d1/abs(PPD5_d2)
 PPD5map <- matrix(PPD5map, t,s)
 PPD5map <- levelplot(t(PPD5map),col.regions = Acol.regions,xlab="sites",ylab="teeth", at = c(-4,-1.5,-0.8,0.8,1.5,8),
                      colorkey = FALSE, labels=as.character(c(-4,-1.5,-0.8,0.8,1.5,8)),
-                     margin=F, scales = list(draw = FALSE),main = "PPD_Smoker")
+                     margin=F, scales = list(draw = FALSE),main = list(label = "PPD_Smoker", cex = 1))
 print(PPD5map, split = c(4, 1, 5, 2), more = TRUE)
 
 ## PPD HbA1c ##
@@ -221,7 +220,7 @@ PPD6map <- PPD6_d1/abs(PPD6_d2)
 PPD6map <- matrix(PPD6map, t,s)
 PPD6map <- levelplot(t(PPD6map),col.regions = Acol.regions,xlab="sites",ylab="teeth", at = c(-4,-1.5,-0.8,0.8,1.5,8),
                      colorkey = FALSE, labels=as.character(c(-4,-1.5,-0.8,0.8,1.5,8)),
-                     margin=F, scales = list(draw = FALSE),main = "PPD_HbA1c")
+                     margin=F, scales = list(draw = FALSE),main = list(label = "PPD_HbA1c", cex = 1))
 print(PPD6map, split = c(5, 1, 5, 2), more = TRUE)
 
 
@@ -245,7 +244,7 @@ CAL2map <- CAL2_d1/abs(CAL2_d2)
 CAL2map <- matrix(CAL2map, t,s)
 CAL2map <- levelplot(t(CAL2map),col.regions = Acol.regions,xlab="sites",ylab="teeth", at = c(-100,-4,-3.2,1,1.48,100),
                      colorkey = FALSE, labels=as.character(c(-100,-4,-3.2,1,1.48,100)),
-                     margin=F, scales = list(draw = FALSE),main = "CAL_Age")
+                     margin=F, scales = list(draw = FALSE),main = list(label = "CAL_Age", cex = 1))
 
 print(CAL2map, split = c(1, 2, 5, 2), more = TRUE)
 
@@ -268,7 +267,7 @@ CAL3map <- CAL3_d1/abs(CAL3_d2)
 CAL3map <- matrix(CAL3map, t,s)
 CAL3map <- levelplot(t(CAL3map),col.regions = Acol.regions,xlab="sites",ylab="teeth", at = c(-10,-1.5,-0.8,0.8,1.5,4),
                      colorkey = FALSE, labels=as.character(c(-10,-1.5,-0.8,0.8,1.5,4)),
-                     margin=F, scales = list(draw = FALSE),main = "CAL_Gender")
+                     margin=F, scales = list(draw = FALSE),main = list(label = "CAL_Gender", cex = 1))
 
 print(CAL3map, split = c(2, 2, 5, 2), more = TRUE)
 
@@ -291,7 +290,7 @@ CAL4map <- CAL4_d1/abs(CAL4_d2)
 CAL4map <- matrix(CAL4map, t,s)
 CAL4map <- levelplot(t(CAL4map),col.regions = Acol.regions,xlab="sites",ylab="teeth", at = c(-4,-2,-1,1,2,4),
                      colorkey = FALSE, labels=as.character(c(-4,-2,-1,1,2,4)),
-                     margin=F, scales = list(draw = FALSE),main = "CAL_BMI")
+                     margin=F, scales = list(draw = FALSE),main = list(label = "CAL_BMI", cex = 1))
 print(CAL4map, split = c(3, 2, 5, 2), more = TRUE)
 
 ## CAL Smoker ##
@@ -312,7 +311,7 @@ CAL5map <- CAL5_d1/abs(CAL5_d2)
 CAL5map <- matrix(CAL5map, t,s)
 CAL5map <- levelplot(t(CAL5map),col.regions = Acol.regions,xlab="sites",ylab="teeth", at = c(-4,-1.5,-0.8,0.8,1.5,100),
                      colorkey = FALSE, labels=as.character(c(-4,-1.5,-0.8,0.8,1.5,100)),
-                     margin=F, scales = list(draw = FALSE),main = "CAL_Smoker")
+                     margin=F, scales = list(draw = FALSE),main = list(label = "CAL_Smoker", cex = 1))
 print(CAL5map, split = c(4, 2, 5, 2), more = TRUE)
 
 ## CAL HbA1c ##
@@ -334,7 +333,7 @@ CAL6map <- CAL6_d1/abs(CAL6_d2)
 CAL6map <- matrix(CAL6map, t,s)
 CAL6map <- levelplot(t(CAL6map),col.regions = Acol.regions,xlab="sites",ylab="teeth", at = c(-4,-1.5,-0.8,0.8,1.25,300),
                      colorkey = FALSE, labels=as.character(c(-4,-1.5,-0.8,0.8,1.3,300)),
-                     margin=F, scales = list(draw = FALSE),main = "CAL_HbA1c")
+                     margin=F, scales = list(draw = FALSE),main = list(label = "CAL_HbA1c", cex = 1))
 print(CAL6map, split = c(5, 2, 5, 2), more = TRUE)
 ```
 
