@@ -354,6 +354,7 @@ print(CAL6map, split = c(5, 2, 5, 2), more = TRUE)
 Now, We fit the BSTT model with tensor normal prior.
 
 ```{r, echo=FALSE}
+library(BSTT)
 BSTT_TN <- BSTT_TN(Y,X,vecy, n.burn = 100, n.save = 1000, thin = 5)
 ```
 

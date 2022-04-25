@@ -20,8 +20,6 @@
 #' @export
 #'
 
-use_vignette(title = "A new Class of Skewed Tensor Distributions")
-
 BSTT_TSSL <- function(Y,X,vecy, n.burn = 10, n.save = 100, thin = 1){
 
   t = dim(Y)[1]; s = dim(Y)[2]; b = dim(Y)[3]; p = dim(X)[1]; n = dim(X)[2];
