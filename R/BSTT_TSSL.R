@@ -312,6 +312,14 @@ BSTT_TSSL <- function(Y,X,vecy, n.burn = 10, n.save = 100, thin = 1){
     }
   }
 
+  kron<-function(...)
+  {
+    M<-list(...)
+    if(is.list(M[[1]])) { M<-M[[1]] }
+    JM<-1 ; for(j in 1:length(M)){ JM<-kronecker(JM,M[[j]]) }
+    JM
+  }
+
   # fill missing responses with the new missing values
   for (N in 1:n){
     vecy[,N] = ifelse (is.na(vecy[,N]), MASS::mvrnorm(length(delta_p[,N][(delta_p[,N]==1)]), mu = t(B.est)%*%X[,N] + kron(diag(lam.est),diag(t*s))%*%W[,N], Sigma = kron(R3,R2,R1) ) , vecy[,N])
