@@ -81,7 +81,7 @@ Here, $D > 1.5$ $(D < -1.5)$ implies strong posterior evidence of positive (nega
 Similarly, the range $-0.8 < D < 0.8$ suggests moderate evidence 
 for null hypothesis, and $0.8 \leq  D \leq 1.5$ represents moderate positive effect, and $-1.5 \leq D \leq -0.8$ denotes moderate negative effect of $x_j$ on $\mathcal{Y}_{i_1i_2i_3}$.
 
-The following plot (Figure 2 in the main text) shows D-statistic map of tensor regression coefficients with TSSL prior. 
+The following plots (Figure 2 in the main text) shows D-statistic map of tensor regression coefficients with TSSL prior. 
 
 ```{r, echo=FALSE, fig.align='center', fig.width=7, fig.height=3, warning=FALSE}
 library(lattice)
@@ -119,7 +119,6 @@ for (i in 1:168){
   CIPPD2[i,] <- quantile(PPD2init[i,], c(0.025,0.5,0.975))
 }
 
-matrix(CIPPD2[,2]/(CIPPD2[,2] - CIPPD2[,1]),t,s)
 PPD2_d1 <- as.matrix(CIPPD2[,2]); PPD2_d2 <- matrix(NA, 168, 1)
 for (i in 1:168){
   if (PPD2_d1[i,] > 0){
@@ -339,7 +338,9 @@ CAL6map <- levelplot(t(CAL6map),col.regions = Acol.regions,xlab="sites",ylab="te
 print(CAL6map, split = c(5, 2, 5, 2), more = TRUE)
 ```
 
-```{r, fig.align='center', fig.width=6, fig.height=3}
+The following Figure shows checkerboard pattern impeding straightforward interpretation.
+
+```{r, echo=FALSE, fig.align='center', fig.width=7, fig.height=3, warning=FALSE}
 library(lattice)
 setwd("C:/Users/inkku/Downloads")
 
@@ -592,7 +593,7 @@ CAL6map <- levelplot(t(CAL6map),col.regions = Acol.regions,xlab="sites",ylab="te
 print(CAL6map, split = c(5, 2, 5, 2), more = TRUE)
 ```
 
-Figure shows checkerboard pattern impeding straightforward interpretation.
+
 
 
 
