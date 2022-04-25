@@ -1,6 +1,6 @@
 # A New Class of Skewed Tensor Distributions
 
-This repository includes code for BSTT (Bayesian Skewed Tensor-t) model with sparsity inducing/tensor normal prior described in the paper "A New Class of Skewed Tensor Distributions", by Lee et al (2021+).
+This repository includes code for BSTT (Bayesian Skewed Tensor-t) model with tensor spike-and-slab lasso/tensor normal prior described in the paper "A New Class of Skewed Tensor Distributions", by Lee et al (2021+).
 
 ## Installation
 
